@@ -80,6 +80,7 @@ public class VLinkedList<E> {
 			current = current.next;
 		}
 		tail = previous;
+		tail.next = null;
 		currentSize--;
 		return current.data;
 	}
