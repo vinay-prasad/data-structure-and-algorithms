@@ -1,6 +1,7 @@
 package org.handsoncoder.dsa.linkedlist;
 
 public class LinkedListTest {
+
 	public static void main(String[] args) {
 		VLinkedList<String> vLinkedList = new VLinkedList<String>();
 		
@@ -37,5 +38,9 @@ public class LinkedListTest {
 		System.out.println(vLinkedList.size());
 		System.out.println(vLinkedList.remove("Coder"));
 		System.out.println(vLinkedList.size());
+		
+		for ( Object s : vLinkedList) {
+			System.out.println(s+ "\n");
+		}
 	}
 }

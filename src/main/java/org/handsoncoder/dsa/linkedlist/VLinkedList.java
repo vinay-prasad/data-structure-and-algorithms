@@ -1,6 +1,9 @@
 package org.handsoncoder.dsa.linkedlist;
 
-public class VLinkedList<E> {
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+public class VLinkedList<E> implements Iterable{
 
 	class Node<E> {
 		Node<E> next;
@@ -9,6 +12,28 @@ public class VLinkedList<E> {
 		Node(E data) {
 			this.next = null;
 			this.data = data;
+		}
+
+	}
+
+	class IteratorHelper implements Iterator<E> {
+		Node<E> index;
+
+		IteratorHelper() {
+			index = head;
+		}
+
+		public boolean hasNext() {
+			return (index != null);
+		}
+
+		public E next() {
+			if (!hasNext()) {
+				throw new NoSuchElementException();
+			}
+			E val = index.data;
+			index = index.next;
+			return val;
 		}
 
 	}
@@ -107,32 +132,32 @@ public class VLinkedList<E> {
 			return false;
 		}
 		if ((((Comparable<E>) element).compareTo(head.data)) == 0) {
-			System.out.println(element+" : Its the head element");
+			System.out.println(element + " : Its the head element");
 			return true;
 		}
 		if ((((Comparable<E>) element).compareTo(tail.data)) == 0) {
-			System.out.println(element+" : Its the tail element");
+			System.out.println(element + " : Its the tail element");
 			return true;
 		}
 		Node<E> current = head;
 		while (current != tail) { // or current.next!=null
 			if ((((Comparable<E>) element).compareTo(current.data)) == 0) {
-				System.out.println(element+" : Its a middle element");
+				System.out.println(element + " : Its a middle element");
 				return true;
 			} else {
 				current = current.next;
 			}
 		}
-		System.out.println(element+" : Element not in the linked list");
+		System.out.println(element + " : Element not in the linked list");
 		return false;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public E remove(E element) {
 		if (head == null || element == null) {
 			return null;
 		}
-		
+
 		Node<E> current = head;
 		Node<E> previous = null;
 		while (current != null) { // or current.next!=null
@@ -145,15 +170,19 @@ public class VLinkedList<E> {
 					tail = previous;
 					return current.data;
 				}
-				previous.next= current.next;
-				currentSize --;
+				previous.next = current.next;
+				currentSize--;
 				return current.data;
 			} else {
 				previous = current;
 				current = current.next;
 			}
 		}
-		System.out.println(element+" : Element not in the linked list");
+		System.out.println(element + " : Element not in the linked list");
 		return null;
+	}
+
+	public Iterator<E> iterator() {
+		return new IteratorHelper();
 	}
 }
