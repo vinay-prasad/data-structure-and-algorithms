@@ -44,6 +44,7 @@ public class InsertionSort {
 		System.out.println("Array to be sorted - " + Arrays.toString(input));
 		int[] output = insertionSort1(input);
 		System.out.println("Sorted array 1 - " + Arrays.toString(output));
+		input = new int[] { 7, 5, 9, 3, 11, 2, 1 };
 		output = insertionSort2(input);
 		System.out.println("Sorted array 2 - " + Arrays.toString(output));
 	}
